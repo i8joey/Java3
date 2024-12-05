@@ -23,7 +23,7 @@
   <div class="scene" id="welcome">
     <article class="content">
 
- 
+
 
       <div class="row">
         <div class=""col-12>
@@ -58,7 +58,7 @@
               </div>
               </form>
 
-        
+
         </div>
       </div>
 
@@ -88,6 +88,9 @@
       </div>
     </article>
   </div><!-- welcome -->
+  <ul>
+    <li *ngFor="let message of messages">{{ message }}</li>
+  </ul>
   <div class="scene" id="hotelinfo">
     <article class="heading">
       <h1>Essential Info</h1>

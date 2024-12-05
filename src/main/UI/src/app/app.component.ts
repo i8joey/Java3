@@ -16,9 +16,8 @@ import {map} from "rxjs/operators";
 export class AppComponent implements OnInit{
 
   constructor(private httpClient:HttpClient){}
-
   private baseURL:string='http://localhost:8080';
-
+  private base1URL:string='http://localhost:8080/welcome';
   private getUrl:string = this.baseURL + '/room/reservation/v1/';
   private postUrl:string = this.baseURL + '/room/reservation/v1';
   public submitted!:boolean;
@@ -27,8 +26,14 @@ export class AppComponent implements OnInit{
   request!:ReserveRoomRequest;
   currentCheckInVal!:string;
   currentCheckOutVal!:string;
+  messages: string[] = [];
+
+  getWelcomeMessage():Observable<string[]> {
+    return this.httpClient.get<string[]>(this.base1URL);
+  }
 
     ngOnInit(){
+      console.log('ngOnInit triggered');
       this.roomsearch= new FormGroup({
         checkin: new FormControl(' '),
         checkout: new FormControl(' ')
@@ -44,6 +49,13 @@ export class AppComponent implements OnInit{
       this.currentCheckInVal = x.checkin;
       this.currentCheckOutVal = x.checkout;
     });
+
+    this.getWelcomeMessage().subscribe(
+      (data) => {
+        console.log('Data received:', data);
+        this.messages = data;
+      }
+    )
   }
 
     onSubmit({value,valid}:{value:Roomsearch,valid:boolean}){
@@ -78,8 +90,6 @@ export class AppComponent implements OnInit{
   }*/
 
     getAll(): Observable<any> {
-
-
        return this.httpClient.get(this.baseURL + '/room/reservation/v1?checkin='+ this.currentCheckInVal + '&checkout='+this.currentCheckOutVal, {responseType: 'json'});
     }
 
