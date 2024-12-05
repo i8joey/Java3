@@ -18,6 +18,7 @@ export class AppComponent implements OnInit{
   constructor(private httpClient:HttpClient){}
   private baseURL:string='http://localhost:8080';
   private base1URL:string='http://localhost:8080/welcome';
+  private base2URL:string='http://localhost:8080/time'
   private getUrl:string = this.baseURL + '/room/reservation/v1/';
   private postUrl:string = this.baseURL + '/room/reservation/v1';
   public submitted!:boolean;
@@ -27,6 +28,11 @@ export class AppComponent implements OnInit{
   currentCheckInVal!:string;
   currentCheckOutVal!:string;
   messages: string[] = [];
+  times: string[] = [];
+
+  getTimes():Observable<string[]> {
+    return this.httpClient.get<string[]>(this.base2URL);
+  }
 
   getWelcomeMessage():Observable<string[]> {
     return this.httpClient.get<string[]>(this.base1URL);
@@ -54,6 +60,13 @@ export class AppComponent implements OnInit{
       (data) => {
         console.log('Data received:', data);
         this.messages = data;
+      }
+    )
+
+    this.getTimes().subscribe(
+      (data : string[]) : void => {
+        console.log('Data received', data);
+        this.times = data;
       }
     )
   }

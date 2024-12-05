@@ -13,6 +13,10 @@
   <div class="scrollmagic-pin-spacer"
        style="display: block; top: auto; left: auto; bottom: auto; right: auto; position: relative; margin: 0 auto auto; box-sizing: content-box; width: 100%; min-height: 44px; height: auto; padding-top: 0; padding-bottom: 0;">
     <nav id="nav" style="position: relative; top: 0; left: 0; bottom: auto; right: auto; width: 100%;">
+      <!-- translated welcome message -->
+      <ul>
+        <li *ngFor="let message of messages">{{ message }}</li>
+      </ul>
       <div class="navbar">
         <div class="brand"><a href="/#welcome">Landon <span>Hotel</span></a></div>
       </div><!-- navbar -->
@@ -22,8 +26,10 @@
 <main id="wrapper">
   <div class="scene" id="welcome">
     <article class="content">
-
-
+<!-- time zones -->
+      <ul>
+        <li *ngFor="let time of times">{{ time }}</li>
+      </ul>
 
       <div class="row">
         <div class=""col-12>
@@ -90,9 +96,6 @@
       </div>
     </article>
   </div><!-- welcome -->
-  <ul>
-    <li *ngFor="let message of messages">{{ message }}</li>
-  </ul>
   <div class="scene" id="hotelinfo">
     <article class="heading">
       <h1>Essential Info</h1>
